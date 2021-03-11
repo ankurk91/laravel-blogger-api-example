@@ -1,0 +1,79 @@
+# http://git-scm.com/docs/gitignore
+
+# various IDEs
+.idea/
+.project
+*.sublime-*
+.vscode/
+
+# logs and cache
+*.log
+npm-debug.log*
+error_log
+.sass-cache
+.cache
+.php_cs.cache
+
+# OS generated files
+[Tt]humbs.db
+ehthumbs.db
+*~
+.*~
+._*
+*.bak
+*.sw[a-p]
+
+# Recycle bin folder used by different os
+.Trash-*
+$RECYCLE.BIN/
+
+# Windows shortcuts
+*.lnk
+
+# Folder config file
+[Dd]esktop.ini
+.DS_Store
+*.DS_Store
+.Spotlight-V100
+
+# node packages
+node_modules/
+
+# composer
+/vendor/
+composer.phar
+
+# Security tokens
+*.pem
+*.pub
+*.crt
+*.key
+/firebase-credentials.json
+
+# Laravel related
+.env
+.env.testing
+/public/hot
+/public/storage
+Homestead.json
+Homestead.yaml
+.phpunit.result.cache
+
+# Laravel IDE helper
+_ide_helper*.php
+.phpstorm.*.php
+
+# Project
+/public/js
+/public/css
+/public/fonts
+/public/images
+/public/mix-manifest.json
+/public/*.js
+/public/*.css
+
+# Force yarn usage
+package-lock.json
+
+# Manually publish package assets
+/public/vendor
