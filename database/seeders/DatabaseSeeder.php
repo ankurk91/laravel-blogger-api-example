@@ -13,6 +13,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->command->info('Seeding: Environment - '.config('app.env'));
+
+        $this->call([
+
+        ]);
+
+        // Don't seed these tables when in production
+        if (! app()->environment(['production', 'staging', 'testing'])) {
+            $this->call([
+                UsersTableSeeder::class,
+                CategoriesTableSeeder::class,
+                PostsTableSeeder::class,
+            ]);
+        }
     }
 }

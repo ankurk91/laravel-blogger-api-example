@@ -26,7 +26,13 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    // protected $namespace = 'App\\Http\\Controllers';
+    protected $namespace = 'App\\Http\\Controllers';
+
+    protected const MODEL_ID_BINDINGS = [
+        'user',
+        'post',
+        'category',
+    ];
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -35,10 +41,15 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Route::patterns(
+            array_fill_keys(self::MODEL_ID_BINDINGS, '[0-9]+')
+        );
+
         $this->configureRateLimiting();
 
         $this->routes(function () {
             Route::prefix('api')
+                ->as('api.')
                 ->middleware('api')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
