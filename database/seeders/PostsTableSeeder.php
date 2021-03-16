@@ -23,7 +23,7 @@ class PostsTableSeeder extends Seeder
         $categories = Category::all();
 
         Post::query()->each(function (Post $post) use ($categories) {
-            $post->categories()->attach($categories->shuffle()->pluck('id')->take(rand(2, 5)));
+            $post->categories()->attach($categories->shuffle()->pluck('id')->take(rand(1, 2)));
         });
     }
 }
