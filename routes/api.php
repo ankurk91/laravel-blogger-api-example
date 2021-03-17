@@ -20,6 +20,7 @@ Route::group(['middleware' => 'guest:sanctum'], function () {
 });
 
 Route::get('explore', 'API\PublicPostController')->name('posts.explore');
+Route::get('posts/{post}', 'API\Post\PostController@show');
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('logout', 'API\Auth\LoginController@logout')->name('logout');
@@ -29,7 +30,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('posts', 'API\Post\PostController@store');
     Route::put('posts/{post}', 'API\Post\PostController@update')->middleware('can:update,post');
     Route::delete('posts/{post}', 'API\Post\PostController@destroy')->middleware('can:delete,post');
-    Route::get('posts/{post}', 'API\Post\PostController@show');
 
     Route::get('categories', 'API\CategoryController@index');
     Route::post('categories', 'API\CategoryController@store');
