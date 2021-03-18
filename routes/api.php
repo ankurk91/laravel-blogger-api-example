@@ -20,24 +20,30 @@ Route::group(['middleware' => 'guest:sanctum'], function () {
 });
 
 Route::get('explore', 'API\PublicPostController')->name('posts.explore');
-Route::get('posts/{post}', 'API\Post\PostController@show');
+Route::get('posts/{post}', 'API\Post\PostController@show')->name('posts.show');
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('logout', 'API\Auth\LoginController@logout')->name('logout');
     Route::get('me', 'API\Account\MeController')->name('me');
 
-    Route::get('posts', 'API\Post\PostController@index');
-    Route::post('posts', 'API\Post\PostController@store');
-    Route::put('posts/{post}', 'API\Post\PostController@update')->middleware('can:update,post');
-    Route::delete('posts/{post}', 'API\Post\PostController@destroy')->middleware('can:delete,post');
+    Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
+        Route::get('/', 'API\Post\PostController@index')->name('index');
+        Route::post('/', 'API\Post\PostController@store')->name('store');
+        Route::put('{post}', 'API\Post\PostController@update')->name('update')
+            ->middleware('can:update,post');
+        Route::put('{post}/publish', 'API\Post\PostController@publish')->name('publish')
+            ->middleware('can:update,post');
+        Route::put('{post}/un-publish', 'API\Post\PostController@unPublish')->name('unPublish')
+            ->middleware('can:update,post');
+        Route::delete('{post}', 'API\Post\PostController@destroy')->name('delete')
+            ->middleware('can:delete,post');
+    });
 
-    Route::get('categories', 'API\CategoryController@index');
-    Route::post('categories', 'API\CategoryController@store');
-    Route::get('categories/{category}', 'API\CategoryController@show');
-    Route::put('categories/{category}', 'API\CategoryController@update');
-    Route::delete('categories/{category}', 'API\CategoryController@destroy');
-});
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
+        Route::get('/', 'API\CategoryController@index')->name('index');
+        Route::post('/', 'API\CategoryController@store')->name('store');
+        Route::get('{category}', 'API\CategoryController@show')->name('show');
+        Route::put('{category}', 'API\CategoryController@update')->name('update');
+        Route::delete('{category}', 'API\CategoryController@destroy')->name('destroy');
+    });
 });
