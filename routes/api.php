@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'guest:sanctum'], function () {
     Route::post('register', 'API\Auth\RegisterController')->name('register');
     Route::post('login', 'API\Auth\LoginController@login')->name('login');
+    Route::post('password/email', 'API\Auth\ForgotPasswordController')->name('password.request');
 });
 
 Route::get('explore', 'API\PublicPostController')->name('posts.explore');
