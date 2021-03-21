@@ -9,15 +9,16 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
     public function login(LoginRequest $request)
     {
         if (! Auth::guard('web')->attempt($request->credentials())) {
-            return response()->json([
-                'message' => Lang::get('auth.failed'),
-            ], Response::HTTP_BAD_REQUEST);
+            throw ValidationException::withMessages([
+                'email' => Lang::get('auth.failed'),
+            ]);
         }
 
         /**
@@ -25,10 +26,7 @@ class LoginController extends Controller
          */
         $user = Auth::guard('web')->user();
 
-        $token = $user->createToken(
-            $request->input('device_name'),
-            ['api']
-        );
+        $token = $user->createToken($request->input('device_name'));
 
         return response()->json([
             'token_type' => 'Bearer',

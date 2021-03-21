@@ -19,7 +19,7 @@ class RegisterControllerTest extends TestCase
 
         $payload = [
             'name' => $this->faker->firstName,
-            'email' => $this->faker->safeEmail,
+            'email' => $this->faker->unique()->safeEmail,
             'password' => $this->faker->password,
         ];
 

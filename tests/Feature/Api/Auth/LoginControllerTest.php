@@ -53,7 +53,7 @@ class LoginControllerTest extends TestCase
 
         $this->postJson(route('api.login'), $payload)
             ->assertSee(Lang::get('auth.failed'))
-            ->assertStatus(400);
+            ->assertStatus(422);
 
         Event::assertNotDispatched(Login::class);
     }
