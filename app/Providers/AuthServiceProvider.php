@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
 
         ResetPassword::createUrlUsing(function ($notifiable, string $token) {
             //todo spa url
-            return 'http://example.com/password/email?token=' . $token;
+            return 'http://example.com/password/email?token='.$token;
         });
     }
 }

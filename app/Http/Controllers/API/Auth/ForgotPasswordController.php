@@ -4,8 +4,6 @@ namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
-use App\Models\User;
-use Dotenv\Exception\ValidationException;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Password;
 
@@ -17,7 +15,7 @@ class ForgotPasswordController extends Controller
 
         if ($status !== Password::RESET_LINK_SENT) {
             throw \Illuminate\Validation\ValidationException::withMessages([
-                'email' => Lang::get($status)
+                'email' => Lang::get($status),
             ]);
         }
 
