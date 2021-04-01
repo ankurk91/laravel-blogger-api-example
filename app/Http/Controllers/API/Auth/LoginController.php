@@ -14,7 +14,11 @@ class LoginController extends Controller
 {
     public function login(LoginRequest $request)
     {
+        $request->ensureIsNotRateLimited();
+
         if (! Auth::guard('web')->attempt($request->credentials())) {
+            $request->increaseRateLimiter();
+
             throw ValidationException::withMessages([
                 'email' => Lang::get('auth.failed'),
             ]);
@@ -26,6 +30,8 @@ class LoginController extends Controller
         $user = Auth::guard('web')->user();
 
         $token = $user->createToken($request->input('device_name'));
+
+        $request->resetRateLimiter();
 
         return response()->json([
             'token_type' => 'Bearer',
