@@ -1,5 +1,7 @@
 # Laravel Blogger
 
+[![tests](https://github.com/ankurk91/laravel-blogger-example/actions/workflows/tests.yml/badge.svg)](https://github.com/ankurk91/laravel-blogger-example/actions/workflows/tests.yml)
+
 ### Prerequisites
 * php v7.4, [see](https://laravel.com/docs/installation) Laravel specific requirements
 * Apache v2.4.33 with ```mod_rewrite```
