@@ -81,6 +81,7 @@
       "composer ide-helper"
     ],
     "ide-helper": [
+      "@php artisan ide-helper:eloquent --ansi",
       "@php artisan ide-helper:generate --ansi",
       "@php artisan ide-helper:meta --ansi",
       "@php artisan ide-helper:models -N --ansi"
