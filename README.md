@@ -1,4 +1,4 @@
-# Laravel Blogger
+# Laravel Blogger REST API
 
 [![tests](https://github.com/ankurk91/laravel-blogger-example/actions/workflows/tests.yml/badge.svg)](https://github.com/ankurk91/laravel-blogger-example/actions/workflows/tests.yml)
 
