@@ -4,10 +4,10 @@
 
 ### Prerequisites
 
-* php v8.1, [see](https://laravel.com/docs/installation) Laravel specific requirements
+* php v8.2, [see](https://laravel.com/docs/installation) Laravel specific requirements
 * Apache v2.4.33 with ```mod_rewrite```
-* MySQL v8.0.30
-* [Composer](https://getcomposer.org) v2.4
+* MySQL v8.0.33
+* [Composer](https://getcomposer.org) v2.5
 
 ### Quick setup
 
