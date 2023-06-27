@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "87b29415-9229-4d71-a4e4-6b1eea509d5c",
+		"_postman_id": "985ac1d2-a8ca-4c31-ba77-f14251c79c6b",
 		"name": "Laravel Blogger",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2035630"
 	},
 	"item": [
 		{
@@ -17,7 +18,7 @@
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
 									"// ",
-									"pm.collectionVariables.set(\"access_token\", jsonData.access_token);"
+									"pm.environment.set(\"access_token\", jsonData.access_token);"
 								],
 								"type": "text/javascript"
 							}
@@ -127,8 +128,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"",
-									"pm.collectionVariables.set(\"access_token\", null);"
+									"pm.environment.set(\"access_token\", null);"
 								],
 								"type": "text/javascript"
 							}
