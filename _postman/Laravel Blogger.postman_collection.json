@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "985ac1d2-a8ca-4c31-ba77-f14251c79c6b",
+		"_postman_id": "fb7a2443-bf00-4e06-a3fd-412971eee749",
 		"name": "Laravel Blogger",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "2035630"
@@ -18,7 +18,8 @@
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
 									"// ",
-									"pm.environment.set(\"access_token\", jsonData.access_token);"
+									"pm.environment.set(\"access_token\", jsonData.access_token);",
+									"pm.collectionVariables.set(\"access_token\", jsonData.access_token);"
 								],
 								"type": "text/javascript"
 							}
@@ -48,7 +49,7 @@
 								},
 								{
 									"key": "device_name",
-									"value": "angular spa",
+									"value": "vue spa",
 									"type": "text"
 								}
 							]
@@ -61,6 +62,120 @@
 							"path": [
 								"api",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "ankurk91@example.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/password/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"password",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "ankurk91@example.com",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "secret",
+									"description": "token string got from email link",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password@123",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password@123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/password/reset",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"password",
+								"reset"
 							]
 						}
 					},
@@ -128,7 +243,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"access_token\", null);"
+									"pm.environment.set(\"access_token\", null);",
+									"pm.collectionVariables.set(\"access_token\", null);"
 								],
 								"type": "text/javascript"
 							}
@@ -193,8 +309,8 @@
 							}
 						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
+							"mode": "formdata",
+							"formdata": [
 								{
 									"key": "title",
 									"value": "post title",
@@ -208,6 +324,17 @@
 								{
 									"key": "publish",
 									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "featured_image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "categories",
+									"value": "",
+									"description": "array",
 									"type": "text"
 								}
 							]
@@ -238,7 +365,7 @@
 								}
 							]
 						},
-						"method": "PUT",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Accept",
@@ -247,21 +374,36 @@
 							}
 						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
+							"mode": "formdata",
+							"formdata": [
 								{
 									"key": "title",
-									"value": "post title",
+									"value": "post title updated",
 									"type": "text"
 								},
 								{
 									"key": "body",
-									"value": "very long string",
+									"value": "very long string updated",
 									"type": "text"
 								},
 								{
 									"key": "publish",
 									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "featured_image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "_method",
+									"value": "put",
+									"type": "text"
+								},
+								{
+									"key": "categories",
+									"value": "",
 									"type": "text"
 								}
 							]
