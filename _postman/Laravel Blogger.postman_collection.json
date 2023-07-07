@@ -444,13 +444,23 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/posts",
+							"raw": "{{url}}/api/posts?search&sort_order=desc",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"posts"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null
+								},
+								{
+									"key": "sort_order",
+									"value": "desc"
+								}
 							]
 						}
 					},
@@ -646,13 +656,19 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/api/explore",
+					"raw": "{{url}}/api/explore?search",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
 						"explore"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": null
+						}
 					]
 				}
 			},

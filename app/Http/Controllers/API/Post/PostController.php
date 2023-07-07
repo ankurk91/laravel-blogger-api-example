@@ -34,7 +34,7 @@ class PostController extends Controller
             });
         }
 
-        $posts->orderBy('id', $request->input('sort_order', 'desc'))
+        $posts = $posts->orderBy('id', $request->input('sort_order', 'desc'))
             ->paginate();
 
         return response()->json([
