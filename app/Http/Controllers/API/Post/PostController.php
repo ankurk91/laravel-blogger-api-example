@@ -7,6 +7,7 @@ use App\Http\Requests\Post\CreateRequest;
 use App\Http\Requests\Post\UpdateRequest;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -15,11 +16,26 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
+        $this->validate($request, [
+            'search' => ['nullable', 'string', 'max:255'],
+            'sort_order' => ['nullable', 'string', 'in:desc,asc'],
+        ]);
+
         /**
          * @var User $user
          */
         $user = $request->user();
-        $posts = $user->posts()->latest()->paginate();
+        $posts = $user->posts();
+
+        if ($request->filled('search')) {
+            $posts->where(function (Builder $query) use ($request) {
+                $query->where('title', 'like', '%'.$request->input('search').'%')
+                    ->orWhere('body', 'like', '%'.$request->input('search').'%');
+            });
+        }
+
+        $posts->orderBy('id', $request->input('sort_order', 'desc'))
+            ->paginate();
 
         return response()->json([
             'data' => $posts,
@@ -63,7 +79,7 @@ class PostController extends Controller
         $post->update($request->validated());
 
         if ($request->filled('categories')) {
-            $post->categories()->attach($request->input('categories'));
+            $post->categories()->sync($request->input('categories'));
         }
 
         return response()->json([

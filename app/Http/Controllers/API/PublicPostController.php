@@ -13,6 +13,7 @@ class PublicPostController extends Controller
     {
         $this->validate($request, [
             'search' => ['nullable', 'string', 'max:255'],
+            'sort_order' => ['nullable', 'string', 'in:desc,asc'],
         ]);
 
         $posts = Post::query()
@@ -25,7 +26,9 @@ class PublicPostController extends Controller
             });
         }
 
-        $posts = $posts->published()->latest()->paginate();
+        $posts = $posts->published()
+            ->orderBy('id', $request->input('sort_order', 'desc'))
+            ->paginate();
 
         return response()->json([
             'data' => $posts,

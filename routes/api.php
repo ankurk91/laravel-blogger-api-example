@@ -27,6 +27,8 @@ Route::get('posts/{post}', 'API\Post\PostController@show')->name('posts.show');
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('logout', 'API\Auth\LoginController@logout')->name('logout');
     Route::get('me', 'API\Account\MeController')->name('me');
+    Route::put('profile', 'API\Account\ProfileController@update')->name('profile');
+    Route::put('password', 'API\Account\PasswordController')->name('password');
 
     Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
         Route::get('/', 'API\Post\PostController@index')->name('index');
